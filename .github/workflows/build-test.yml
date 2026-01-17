@@ -1,4 +1,4 @@
-name: test-and-build
+name: run-unit-test-and-build
 
 on:
   pull_request:
