@@ -22,7 +22,7 @@ jobs:
           pip install -r src/requirements.txt
 
       - name: Run unit tests
-        run: pytest -v -q
+        run: pytest -v
 
       - name: Docker build smoke test
         run: docker build -t fastapi-add:build-test .
