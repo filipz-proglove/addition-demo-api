@@ -1,4 +1,4 @@
-name: release
+name: Release
 
 on:
   push:
@@ -31,7 +31,7 @@ jobs:
           pip install -r src/requirements.txt
 
       - name: Run unit tests
-        run: pytest -q
+        run: pytest -v
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
