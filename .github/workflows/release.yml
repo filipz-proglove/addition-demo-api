@@ -1,0 +1,53 @@
+name: release
+
+on:
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  test-build-push:
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_REGION: eu-west-1
+      AWS_ACCOUNT_ID: "155765116381"
+      ECR_REPOSITORY: "ns01/addition-demo-api"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install -r src/requirements.txt
+
+      - name: Run unit tests
+        run: pytest -q
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws-region: eu-west-1
+
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push image
+        run: |
+          IMAGE="155765116381.dkr.ecr.eu-west-1.amazonaws.com/ns01/addition-demo-api"
+
+          docker build -t "$IMAGE:${GITHUB_SHA}" .
+          docker tag "$IMAGE:${GITHUB_SHA}" "$IMAGE:latest"
+
+          docker push "$IMAGE:${GITHUB_SHA}"
+          docker push "$IMAGE:latest"
