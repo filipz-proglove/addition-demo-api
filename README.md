@@ -1,17 +1,15 @@
-## Simple addition API
+## Integer addition API
 
-
-# Overview
 
 A simple Python based web api that will conviniently add two integers for you!
 
 It uses FastAPI web framework which was chosen because it is very simple and looks similar to Spiring boot. For testing we are using pytest.
 
-# CI/CD
+## CI/CD
 
 
 In order to facilitate fast development and deployment we are using GitHub Actions.
-There are two pipelines
+There are two pipelines :
 
 - [Unit test & Build](.github/workflows/unit-test-and-build.yml)
 - [Release](./.github/workflows/release.yml)
