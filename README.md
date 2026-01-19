@@ -1,7 +1,7 @@
 ## Integer addition API
 
 
-A simple Python based web api that will conviniently add two integers for you!
+A simple Python based web api that will conveniently add two integers for you!
 
 It uses FastAPI web framework which was chosen because it is very simple and looks similar to Spiring boot. For testing we are using pytest.
 
